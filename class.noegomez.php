@@ -21,41 +21,67 @@ class NG{
             'username' => $this->username,
             'password' => $this->password
         ));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $result = curl_exec($ch);
         curl_close($ch);
         
         if(!$result){
             return false;
         }else{
-            return json_decode($result);
+            return $result;
         }
 
     }
 
     public function getPosts(){
-        $token = $this->getToken();
+        $token = self::getToken();
         if(!$token){
             return false;
         }
 
         $token = json_decode($token);
-        // echo 'result:' . $token;
-        // $token = $token->data->token;
+        $token = $token->token;
 
-        // curl_init();
+        curl_init();
 
-        // $url = $this->host . 'wp-json/wp/v2/posts';
-        // $ch = curl_init($url);
-        // curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        //     'Authorization: Bearer ' . $token
-        // ));
-        // $result = curl_exec($ch);
-        // curl_close($ch);
+        $url = $this->host . 'wp-json/wp/v2/posts';
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $token
+        ));
+        $result = curl_exec($ch);
+        curl_close($ch);
         
-        // if(!$result){
-        //     return false;
-        // }else{
-        //     return $result;
-        // }
+        if(!$result){
+            return false;
+        }else{
+            return $result;
+        }
+    }
+
+    public function getPost($id){
+        $token = self::getToken();
+        if(!$token){
+            return false;
+        }
+
+        $token = json_decode($token);
+        $token = $token->token;
+
+        curl_init();
+
+        $url = $this->host . 'wp-json/wp/v2/posts/' . $id;
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Authorization: Bearer ' . $token
+        ));
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        if(!$result){
+            return false;
+        }else{
+            return $result;
+        }
     }
 }

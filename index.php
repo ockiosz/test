@@ -1,7 +1,9 @@
 <?php
 
 require 'class.noegomez.php';
+$wp_user     = '';
+$wp_password = '';
 
-$conn = new NG('juan', 'wv5PY&CwPmDS98F&2ZorY8BS');
+$conn = new NG($wp_user, $wp_password);
 
-$conn->getPosts();
+echo $conn->getPost(1);
