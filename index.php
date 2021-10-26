@@ -1,20 +1,7 @@
 <?php
 
-/**
- * @file
- * Testing login in wordpress with api wordpress
- */
+require 'class.noegomez.php';
 
-    curl_init();
+$conn = new NG('juan', 'wv5PY&CwPmDS98F&2ZorY8BS');
 
-    $url = 'https://pibble.co/wp-json/jwt-auth/v1/token';
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS , array(
-        'username' => 'USERNAME_HERE',
-        'password' => 'PASSWORD_HERE'
-    ));
-    $result = curl_exec($ch);
-    curl_close($ch);
-    echo $result;
-?>
+$conn->getPosts();
